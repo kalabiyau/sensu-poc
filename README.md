@@ -2,7 +2,7 @@
 =========
 
 Goal of this project - to discuss future packaging for Sensu plugins.
-Why - we have (https://github.com/sensu/sensu-community-plugins)[plugins] repo already? Yes, we have it. It has a lot of :heart: from developers and users, but as well we have some problems, which also persist in `classic monitoring systems` with plugins nature:
+Why - we have [plugins](https://github.com/sensu/sensu-community-plugins) repo already? Yes, we have it. It has a lot of :heart: from developers and users, but as well we have some problems, which also persist in `classic monitoring systems` with plugins nature:
 
 * no version management for checks except for sha-ref which is not so useful in real life
 * no dependencies management
@@ -24,6 +24,6 @@ Killer features:
 * use gem pattern as a foundation
 * setup centralized server based on `geminabox`
 * extend sensu client upcoming release to be able to install `those check gems` from `geminabox` which can be or local or global (Sensu supported)
-* for each of existing check with more than 5 contributors - setup a separate repo like (sensu-poc)[this one] + add test coverage for them
+* for each of existing check with more than 5 contributors - setup a separate repo like [this one](sensu-poc) + add test coverage for them
 * package and deliver(to server) tested checks each run of Travis CI if they changed and changes are sane
 

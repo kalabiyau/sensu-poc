@@ -1,4 +1,4 @@
-** DRAFT ** sensu-packaging (Proof of concept)
+** DRAFT ** sensu-packaging RFC
 =========
 
 Goal of this project - to discuss future packaging for Sensu plugins.

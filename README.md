@@ -24,6 +24,6 @@ Killer features:
 * use gem pattern as a foundation
 * setup centralized server based on `geminabox`
 * extend sensu client upcoming release to be able to install `those check gems` from `geminabox` which can be or local or global (Sensu supported)
-* for each of existing check with more than 5 contributors - setup a separate repo like [this one](sensu-poc) + add test coverage for them
+* for each of existing check with more than 5 contributors - setup a separate repo like [this one](https://github.com/kalabiyau/sensu-poc) + add test coverage for them
 * package and deliver(to server) tested checks each run of Travis CI if they changed and changes are sane
 

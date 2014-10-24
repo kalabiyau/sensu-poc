@@ -8,6 +8,10 @@
 #   Note: if testing reverse DNS with -t PTR option,
 #   results will end with trailing '.' (dot)
 #
+# EXAMPLES:
+#    check purple.com A record using the dns server 8.8.8.8
+#    $ check-dns.rb -s 8.8.8.8 -d purple.com -t A
+#
 # OUTPUT:
 #   plain-text
 #
@@ -27,55 +31,55 @@ require 'sensu-plugin/check/cli'
 class DNS < Sensu::Plugin::Check::CLI
 
   option :domain,
-    :description => "Domain to resolve (or ip if type PTR)",
+    :description => 'Domain to resolve (or ip if type PTR)',
     :short => '-d DOMAIN',
     :long => '--domain DOMAIN'
 
   option :type,
-    :description => "Record type to resolve (A, AAAA, TXT, etc) use PTR for reverse lookup",
+    :description => 'Record type to resolve (A, AAAA, TXT, etc) use PTR for reverse lookup',
     :short => '-t RECORD',
     :long => '--type RECORD',
     :default => 'A'
 
   option :server,
-    :description => "Server to use for resolution",
+    :description => 'Server to use for resolution',
     :short => '-s SERVER',
     :long => '--server SERVER'
 
   option :result,
-    :description => "A positive result entry",
+    :description => 'A positive result entry',
     :short => '-r RESULT',
     :long => '--result RESULT'
 
   option :warn_only,
-    :description => "Warn instead of critical on failure",
+    :description => 'Warn instead of critical on failure',
     :short => '-w',
     :long => '--warn-only',
     :boolean => true
 
   option :debug,
-    :description => "Print debug information",
+    :description => 'Print debug information',
     :long => '--debug',
     :boolean => true
 
   def resolve_domain
     if config[:type] == 'PTR'
-      cmd = "dig #{config[:server] ? "@#{config[:server]}" : ""} -x #{config[:domain]} +short +time=1"
+      cmd = "dig #{config[:server] ? "@#{config[:server]}" : ''} -x #{config[:domain]} +short +time=1"
     else
-      cmd = "dig #{config[:server] ? "@#{config[:server]}" : ""} #{config[:domain]} #{config[:type]} +short +time=1"
+      cmd = "dig #{config[:server] ? "@#{config[:server]}" : ''} #{config[:domain]} #{config[:type]} +short +time=1"
     end
     puts cmd if config[:debug]
     output = `#{cmd}`
     puts output if config[:debug]
     # Trim, split, remove comments and empty lines
-    entries = output.strip.split("\n").reject{|l| l.match('^;') || l.match('^$')}
+    entries = output.strip.split("\n").reject { |l| l.match('^;') || l.match('^$') }
     puts "Entries: #{entries}" if config[:debug]
     entries
   end
 
   def run
     if config[:domain].nil?
-      unknown "No domain specified"
+      unknown 'No domain specified'
     else
       entries = resolve_domain
       if entries.length.zero?
